@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#0b1822" />
+  <link rel="manifest" href="./manifest.webmanifest?v=2" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/pulso-coral-v2-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/pulso-coral-v2-180.png" />
+  <title>ED - PULSO — Cronômetro de RCP</title>
+  <meta name="description" content="Protótipo de cronômetro para ciclos de RCP e registro rápido de intervenções." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./clinical-form.css" />
+  <link rel="stylesheet" href="./adrenaline-alert.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36"><path d="M4 19h7l3-7 5 14 4-9 2 2h7" /></svg></span><span class="brand-copy"><span class="brand-title">ED - PULSO</span><span class="brand-clinician">Enf. Wilson Borges</span></span></div>
+      <div class="topbar-right"><button id="settingsOpen" class="theme-toggle" type="button">⚙ Configurar</button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Ativar modo claro" title="Alternar tema"><span id="themeIcon">☼</span><span id="themeLabel">Modo claro</span></button></div>
+    </header>
+
+    <main>
+      <div class="dashboard-grid">
+        <section class="timer-card card" aria-labelledby="timerTitle">
+          <div class="card-top"><div class="timer-heading-stack"><div class="section-kicker"><span class="kicker-icon">◷</span> TEMPO DE PCR</div><span id="sessionStatus" class="session-status">Pronto para iniciar</span></div><button id="deathBtn" class="death-button" type="button" disabled>ÓBITO</button></div>
+          <div class="total-time" id="totalTime" role="timer" aria-label="Tempo total">00:00</div>
+          <div class="circle-timers">
+            <div class="circle-timer-card"><div class="circle-timer" role="timer" aria-label="Tempo restante do ciclo"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="ring-track" cx="50" cy="50" r="44"/><circle class="ring-progress" id="cycleRing" cx="50" cy="50" r="44"/></svg><div class="circle-content"><span class="circle-value" id="cycleRemaining">02:00</span><span class="circle-caption" id="cycleCaption">CICLO <b id="cycleNumber">1</b></span></div></div></div>
+            <div class="circle-timer-card"><div class="circle-timer"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="ring-track" cx="50" cy="50" r="44"/><circle class="ring-progress" id="adrenalineRing" cx="50" cy="50" r="44"/></svg><div class="circle-content" role="timer" aria-label="Tempo até o próximo lembrete de adrenalina"><span class="circle-value" id="reminderClock">--:--</span><span class="circle-caption">ADRENALINA</span></div><div class="adrenaline-circle-alert" id="adrenalineCircleAlert" role="alert" hidden><div class="adrenaline-alert-heading"><span class="adrenaline-alert-top">DOSE PENDENTE</span><span class="adrenaline-alert-title"><svg viewBox="0 0 24 24" aria-hidden="true"><g transform="rotate(45 12 12)" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="5" width="8" height="13" rx="1.5"/><path d="M8 8h8M8 11h8M12 5V3m-2 0h4m-2 15v3"/></g></svg><span>ADRENALINA</span></span></div><button id="confirmAdrenaline" type="button"><span>CONFIRMAR</span><small>ADMINISTRAÇÃO</small></button></div></div></div>
+          </div>
+          <div class="timer-actions"><button class="primary-button" id="startPauseBtn" type="button"><span class="button-icon" id="startPauseIcon">▶</span><span id="startPauseText">INICIAR</span></button><button class="secondary-button adrenaline-control" id="timerAdrenalineBtn" type="button" disabled><span class="drug-icon">💉</span><span>ADRENALINA</span><b id="adrenalineCount">0</b></button></div>
+        </section>
+
+        <section class="actions-card card" aria-labelledby="actionsTitle">
+          <div class="card-top"><div><h2 id="actionsTitle">Intervenções</h2></div><button id="customBtn" class="add-intervention" type="button" aria-label="Adicionar outra intervenção">+</button></div>
+          <div class="action-group-label">MEDICAMENTOS E OUTRAS AÇÕES</div>
+          <div class="drug-grid intervention-grid"><button class="drug-button" data-event="Amiodarona" data-kind="medication"><span class="drug-icon">💉</span><span class="drug-copy"><strong>Amiodarona</strong></span></button><button class="drug-button" data-event="Bicarbonato" data-kind="medication"><span class="drug-icon">💉</span><span class="drug-copy"><strong>Bicarbonato</strong></span></button><button class="drug-button" data-event="Desfibrilação" data-kind="action"><span class="drug-icon">⚡</span><span class="drug-copy"><strong>Desfibrilação</strong></span></button></div>
+        </section>
+
+        <section class="timeline-card card" aria-labelledby="timelineTitle"><div class="timeline-heading"><h2 id="timelineTitle">Linha do tempo</h2><span class="event-count" id="eventCount">0 registros</span></div><div class="timeline-body" id="timelineBody"><div class="empty-state"></div></div><div class="timeline-footer"><span>REGISTROS DESTA SESSÃO</span><button id="resetBtn" type="button">Iniciar nova sessão <span>↺</span></button></div><div class="evolution-panel">
+          <div class="outcome-fields clinical-form-card"><div class="form-card-title">Desfecho da reanimação</div><label for="outcomeSelect">Situação documentada</label><select id="outcomeSelect"><option value="none">Não informado</option><option value="rce">Retorno da circulação espontânea (RCE)</option><option value="death">Óbito declarado pelo médico</option><option value="stopped">Reanimação encerrada sem desfecho informado</option><option value="other">Outro desfecho</option></select>
+            <div id="otherOutcomeWrap" hidden><label for="otherOutcomeText">Descreva o desfecho</label><input id="otherOutcomeText" type="text" maxlength="180" /></div>
+            <div id="deathOutcomeFields" class="death-outcome-fields" hidden><div class="death-field-grid"><div><label for="deathTimeInput">Horário do óbito</label><input id="deathTimeInput" type="text" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="HH:MM" /></div><div><label for="physicianInput">Médico responsável <small>(opcional)</small></label><input id="physicianInput" type="text" maxlength="100" placeholder="Nome do médico" /></div></div><label class="clinical-check"><input id="noRceConfirmed" type="checkbox" /> Ausência de RCE confirmada nos registros</label><label class="clinical-check"><input id="socialWorkerContact" type="checkbox" /> Assistente social acionada para contato com familiar</label></div>
+          </div>
+          <div id="postMortemSection" class="postmortem-section clinical-form-card" hidden><div class="form-card-title">Cuidados pós-morte</div><label class="clinical-check"><input id="careDevices" type="checkbox" /> Todos os dispositivos do paciente foram removidos</label><label class="clinical-check"><input id="careBag" type="checkbox" /> Corpo preparado e acondicionado em saco próprio para óbito</label><label class="clinical-check"><input id="careId" type="checkbox" /> Identificação do corpo realizada conforme protocolo institucional</label><label class="clinical-check"><input id="careMorgue" type="checkbox" /> Corpo encaminhado ao necrotério da unidade</label></div>
+          <span id="evolutionFeedback" class="evolution-feedback" role="status" aria-live="polite"></span>
+          <textarea id="evolutionText" aria-label="Evolução de enfermagem" placeholder="A evolução gerada aparecerá aqui para revisão e edição."></textarea><div class="evolution-actions"><button id="generateEvolution" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v5h5M9 13h6M9 17h5"/></svg><span>Gerar evolução</span></button><button id="shareEvolution" type="button" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span>Copiar evolução</span></button><button id="nativeShareEvolution" type="button" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="18" cy="19" r="2"/><path d="m8 11 8-5M8 13l8 5"/></svg><span>Compartilhar</span></button></div><span id="shareStatus" role="status" aria-live="polite"></span></div></section>
+      </div>
+    </main>
+  </div>
+  <dialog id="deathDialog"><form method="dialog"><h2>Confirmar registro de óbito?</h2><p>Ao confirmar, o horário será registrado e os cronômetros serão pausados.</p><div class="dialog-actions"><button value="cancel">Cancelar</button><button id="confirmDeath" value="confirm">Confirmar óbito</button></div></form></dialog>
+  <dialog id="settingsDialog"><form id="settingsForm"><div class="dialog-top"><span>CONFIGURAÇÕES DO PROTOCOLO</span><button type="button" id="settingsClose" aria-label="Fechar">×</button></div><h2>Intervalos e alertas</h2><p>Confira e ajuste estes valores ao protocolo da sua instituição.</p><label for="cycleMinutesInput">Ciclo de RCP (minutos)</label><input id="cycleMinutesInput" type="number" min="0.5" max="10" step="0.5" required /><label for="pulseSecondsInput">Checagem de pulso (segundos)</label><input id="pulseSecondsInput" type="number" min="0" max="120" step="1" required /><label for="adrenalineMinutesInput">Intervalo do lembrete de adrenalina (minutos)</label><input id="adrenalineMinutesInput" type="number" min="0.5" max="30" step="0.5" required /><label class="setting-check"><input id="soundEnabled" type="checkbox" /> Som no lembrete</label><label class="setting-check"><input id="vibrationEnabled" type="checkbox" /> Vibração no lembrete (se disponível)</label><span id="settingsFeedback" role="status"></span><div class="dialog-actions"><button type="button" id="settingsCancel">Cancelar</button><button type="submit">Salvar configurações</button></div></form></dialog>
+  <dialog id="customDialog"><form method="dialog" id="customForm"><div class="dialog-top"><span>NOVO REGISTRO</span><button type="button" id="closeDialog" aria-label="Fechar">×</button></div><h2>O que aconteceu?</h2><p>Adicione uma intervenção à linha do tempo.</p><label for="customName">Nome da intervenção</label><input id="customName" maxlength="50" autocomplete="off" placeholder="Ex.: Acesso venoso" required /><div class="dialog-actions"><button type="button" id="cancelDialog">Cancelar</button><button type="submit">Registrar ação</button></div></form></dialog>
+  <script src="./evolution.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>

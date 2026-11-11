@@ -1,0 +1,151 @@
+/* Clear, high contrast adrenaline reminder using ED - PULSO colors. */
+.adrenaline-circle-alert[hidden] { display: none !important; }
+
+.circle-timer-card:last-child .circle-timer.adrenaline-alert-active { isolation: isolate; }
+
+.circle-timer-card:last-child .circle-timer.adrenaline-alert-active::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 4%;
+  border: 2px solid #ffb21f;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 36%, #172c38 0%, #0b1822 78%);
+  box-shadow: inset 0 0 20px #ffb21f12, 0 0 8px #ffb21f28;
+}
+
+.circle-timer-card:last-child .circle-timer.adrenaline-alert-active .ring-track { stroke: #263d48; }
+
+.circle-timer-card:last-child .circle-timer.adrenaline-alert-active .ring-progress {
+  stroke: #ffb21f !important;
+  stroke-dashoffset: 0 !important;
+  filter: drop-shadow(0 0 5px #ffb21f70) !important;
+  animation: none !important;
+}
+
+.circle-timer-card:last-child .circle-timer.alert-fresh .ring-progress {
+  animation: epinephrine-pulse .7s ease-in-out infinite !important;
+}
+
+.circle-timer-card:last-child .circle-timer.adrenaline-alert-active .circle-content { display: none; }
+
+.adrenaline-circle-alert {
+  position: absolute;
+  z-index: 2;
+  inset: 5%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 15% 5% 6%;
+  border-radius: 50%;
+  color: #e9f0f2;
+  text-align: center;
+  pointer-events: none;
+}
+
+.adrenaline-alert-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.adrenaline-alert-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 23px;
+  padding: 3px 12px;
+  border: 1px solid #ffca58;
+  border-radius: 999px;
+  background: #ffb21f;
+  color: #0b1822;
+  white-space: nowrap;
+  font: 900 clamp(9px, 1vw, 13px)/1 'DM Sans', sans-serif;
+  letter-spacing: .045em;
+  box-shadow: 0 2px 8px #0003;
+}
+
+.adrenaline-alert-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #f3f6f7;
+  white-space: nowrap;
+  font: 900 clamp(12px, 1.3vw, 18px)/1.1 Manrope, sans-serif;
+  letter-spacing: .015em;
+  text-shadow: 0 1px 3px #0005;
+}
+
+.adrenaline-alert-title svg {
+  flex: 0 0 auto;
+  width: clamp(18px, 1.7vw, 24px);
+  height: clamp(18px, 1.7vw, 24px);
+  color: #ffb21f;
+  filter: drop-shadow(0 0 4px #ffb21f44);
+}
+
+.adrenaline-circle-alert button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
+  min-height: 44px;
+  height: 34%;
+  max-height: 56px;
+  margin-top: auto;
+  padding: 4px 5px;
+  border: 1px solid #080b0d;
+  border-radius: 13px;
+  background: #e9685d;
+  box-shadow: 0 4px 12px #0006, inset 0 1px 0 #ffb7ae66;
+  color: #0b1822;
+  cursor: pointer;
+  touch-action: manipulation;
+  pointer-events: auto;
+}
+
+.adrenaline-circle-alert button span {
+  font: 900 clamp(12px, 1.15vw, 16px)/1 Manrope, sans-serif;
+  letter-spacing: .025em;
+}
+
+.adrenaline-circle-alert button small {
+  font: 800 clamp(8px, .78vw, 11px)/1 'DM Sans', sans-serif;
+  letter-spacing: .08em;
+}
+
+.adrenaline-circle-alert button:focus-visible {
+  outline: 3px solid #e9f0f2;
+  outline-offset: 2px;
+}
+
+.circle-timer.alert-fresh .adrenaline-circle-alert { animation: adrenaline-alert-glow .8s ease-in-out infinite; }
+
+@keyframes adrenaline-alert-glow { 50% { filter: brightness(1.07); } }
+@keyframes epinephrine-pulse {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px #ffb21f); }
+  50% { opacity: .78; filter: drop-shadow(0 0 10px #ffad00); }
+}
+
+@media (max-width: 390px) {
+  .adrenaline-circle-alert { padding-top: 14%; }
+  .adrenaline-alert-heading { gap: 11px; }
+  .adrenaline-alert-top { min-height: 21px; padding-inline: 10px; font-size: 9px; }
+  .adrenaline-alert-title { gap: 6px; font-size: 12px; }
+  .adrenaline-alert-title svg { width: 18px; height: 18px; }
+  .adrenaline-circle-alert button { min-height: 44px; height: 36%; }
+  .adrenaline-circle-alert button span { font-size: 12px; }
+  .adrenaline-circle-alert button small { font-size: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circle-timer-card:last-child .circle-timer.alert-fresh .ring-progress,
+  .circle-timer.alert-fresh .adrenaline-circle-alert { animation: none !important; }
+}

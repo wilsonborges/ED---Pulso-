@@ -1,0 +1,270 @@
+/* Clinical documentation: keep form fields within the card on small screens. */
+html { touch-action: manipulation; }
+.evolution-panel,
+.evolution-panel * {
+  box-sizing: border-box;
+}
+
+.evolution-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  min-width: 0;
+  width: 100%;
+  padding: 25px 28px 29px;
+  overflow: hidden;
+}
+
+.evolution-panel > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.evolution-panel .clinical-form-card {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 19px 20px;
+  border: 1px solid #8c5552;
+  border-left: 4px solid #e9685d;
+  border-radius: 12px;
+  background: #302a2d;
+  box-shadow: 0 10px 26px #070c111d;
+}
+
+.evolution-panel .clinical-form-card[hidden],
+.evolution-panel [hidden] {
+  display: none !important;
+}
+
+.evolution-panel .form-card-title {
+  margin: 0 0 15px;
+  color: #fff0ec;
+  font: 800 15px/1.3 Manrope, sans-serif;
+}
+
+.evolution-panel .form-card-title::before {
+  width: 4px;
+  height: 18px;
+  background: #f58276;
+}
+
+.evolution-panel .outcome-fields,
+.evolution-panel .death-outcome-fields,
+.evolution-panel .death-field-grid,
+.evolution-panel #otherOutcomeWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  gap: 9px;
+}
+
+.evolution-panel .death-outcome-fields {
+  width: 100%;
+  margin-top: 9px;
+  padding: 4px 0 0;
+  border: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.evolution-panel .death-field-grid > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  gap: 7px;
+}
+.evolution-panel .death-field-grid input {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.evolution-panel label:not(.clinical-check) {
+  color: #e4c5bf;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.evolution-panel select,
+.evolution-panel input[type="text"],
+.evolution-panel input[type="time"] {
+  display: block;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 46px;
+  margin: 0;
+  padding: 10px 13px;
+  overflow: hidden;
+  border: 1px solid #925e59;
+  border-radius: 9px;
+  outline: none;
+  background: #211f24;
+  color: #fff6f4;
+  font: 500 14px/1.3 'DM Sans', sans-serif;
+}
+
+.evolution-panel select:focus,
+.evolution-panel input:focus,
+.evolution-panel textarea:focus {
+  border-color: #ff9b8c;
+  box-shadow: 0 0 0 3px #e9685d33;
+}
+
+.evolution-panel .clinical-check {
+  display: flex !important;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  gap: 11px;
+  margin: 0 !important;
+  padding: 11px 12px;
+  border: 1px solid #6f4b49;
+  border-radius: 9px;
+  background: #3e3033;
+  color: #f5ded9 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.45;
+}
+
+.evolution-panel .clinical-check input {
+  flex: 0 0 17px;
+  width: 17px !important;
+  height: 17px;
+  margin: 0 !important;
+  accent-color: #e9685d;
+}
+
+.evolution-panel .postmortem-section {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.evolution-panel textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 210px;
+  padding: 17px 18px;
+  resize: none;
+  overflow-y: hidden;
+  border: 1px solid #925e59;
+  border-radius: 12px;
+  background: #211f24;
+  color: #fff6f4;
+  font: 14px/1.7 'DM Sans', sans-serif;
+  text-align: justify;
+}
+
+.evolution-panel .evolution-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  min-width: 0;
+  gap: 10px;
+}
+
+.evolution-panel .evolution-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid #f19b8e;
+  border-radius: 10px;
+  color: #fff !important;
+  font: 800 13px/1.2 'DM Sans', sans-serif;
+  box-shadow: 0 8px 18px #e9685d35;
+  transition: transform .15s ease, filter .15s ease;
+}
+.evolution-panel .evolution-actions button svg {
+  flex: none;
+  width: 17px;
+  height: 17px;
+}
+
+.evolution-panel .evolution-actions #generateEvolution { background: #e9685d; }
+.evolution-panel .evolution-actions #shareEvolution { background: #c8524a; }
+.evolution-panel .evolution-actions #nativeShareEvolution { background: #a9413d; }
+.evolution-panel .evolution-actions button:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+.evolution-panel .evolution-actions button:disabled { opacity: .5; box-shadow: none; }
+
+html[data-theme="light"] .evolution-panel .clinical-form-card {
+  background: #fff8f6;
+  border-color: #e4ada5;
+  border-left-color: #e9685d;
+  box-shadow: 0 10px 25px #763b3212;
+}
+html[data-theme="light"] .evolution-panel .form-card-title { color: #633834; }
+html[data-theme="light"] .evolution-panel .death-outcome-fields { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+html[data-theme="light"] .evolution-panel label:not(.clinical-check) { color: #754d48; }
+html[data-theme="light"] .evolution-panel select,
+html[data-theme="light"] .evolution-panel input[type="text"],
+html[data-theme="light"] .evolution-panel input[type="time"],
+html[data-theme="light"] .evolution-panel textarea {
+  background: #fff;
+  border-color: #d5a39b;
+  color: #4f3330;
+}
+html[data-theme="light"] .evolution-panel .clinical-check {
+  background: #f7e9e5;
+  border-color: #e9c4be;
+  color: #694741 !important;
+}
+html[data-theme="light"] .evolution-panel .evolution-actions #generateEvolution { background: #e9685d; }
+html[data-theme="light"] .evolution-panel .evolution-actions #shareEvolution { background: #c8524a; }
+html[data-theme="light"] .evolution-panel .evolution-actions #nativeShareEvolution { background: #a9413d; }
+
+/* Keep the project identity visible without competing with the timers. */
+.brand-copy {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.brand-title { line-height: 1; }
+.brand-clinician {
+  color: #aebfc5;
+  font: 600 10px/1.2 'DM Sans', sans-serif;
+  letter-spacing: .08em;
+}
+
+/* The action labels should remain readable beside their icons. */
+.evolution-panel .evolution-actions button > span { font-size: 15.6px; }
+
+/* Settings labels need stronger contrast, especially in light mode. */
+#settingsDialog form > label:not(.setting-check) {
+  color: #eef5f5;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  line-height: 1.35;
+}
+html[data-theme="light"] #settingsDialog form > label:not(.setting-check) {
+  color: #050505;
+}
+
+@media (max-width: 700px) {
+  .evolution-panel { padding: 18px 16px 22px; gap: 13px; }
+  .evolution-panel .clinical-form-card { padding: 16px 14px; }
+  .evolution-panel select,
+  .evolution-panel input[type="text"],
+  .evolution-panel input[type="time"] { font-size: 16px; }
+  .evolution-panel .evolution-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .evolution-panel .evolution-actions #nativeShareEvolution { grid-column: 1 / -1; }
+  .evolution-panel .evolution-actions button { min-height: 48px; font-size: 12px; padding: 10px 8px; }
+  .evolution-panel .evolution-actions button > span { font-size: 14.4px; }
+  .brand-clinician { font-size: 9px; letter-spacing: .06em; }
+}
